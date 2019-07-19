@@ -36,7 +36,7 @@ Unfortunately, when analysing structural differences between all four pdbs, it's
 
  The RMSD analysis was performed in the jupyter notebook file 'rmsd_analysis.ipynb'. Here I look at the pairwise rmsd (in Å) between all nine structures taking into account common heavy atoms' positions.
 
- ![](https://doc-0s-20-docs.googleusercontent.com/docs/securesc/l7mhmodi13shvjugmqegmp60593u1skd/onlsjb8d63uc58300ou22k98cab93m34/1563573600000/17081007517431872113/17081007517431872113/1Jh2NUkPl2ADhsSQIPPt8eKWIUkAP_n2s)
+ ![](pics/rmsd_heavy.png)
 
 As expected, the biggest difference is between the conformation of two opposite electric field directions (1.1 Å). Although I expected much bigger difference. 
 
