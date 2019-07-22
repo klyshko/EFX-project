@@ -36,7 +36,7 @@ Unfortunately, when analysing structural differences between all four pdbs, it's
 
  The RMSD analysis was performed in the jupyter notebook file [rmsd_analysis.ipynb](rmsd_analysis.ipynb). Here I look at the pairwise rmsd (in Å) between all nine structures taking into account common heavy atoms' positions. (All pdbs have different atom numbers and I had to find the set of common atoms)
 
- ![](pics/rmsd_heavy.png)
+![](pics/rmsd_heavy.png)
 
 As expected, the biggest difference is between the conformation of two opposite electric field directions (1.1 Å). Although I expected much bigger difference. 
 
@@ -90,5 +90,35 @@ Lauren and Mike Socolich, a research scientist in their lab who has done a lot w
 - Occupancy of the crystal water sites vs random water sites averaged over time for a range of cutoff distances:
 
 ![](pics/occupancy.png)  
+
+Intuitively, the last graph represents "something like" radial distribution function for the crystal waters. This monotoneous function converging to unity shows that at the distance less than 2.0 Å from the crystal sites it is more likely to find a water than from the  bulk water sites... It means these sites serve as "magnets" - crystal water postions are more favorable. Thus, the setup of the crystal cell seems to reproduce this effect.    
+
+
+### 1.8 Salt concentration and pH
+
+
+**Lines from the `5e11.pdb` file:**
+
+> CRYSTAL SOLVENT CONTENT, VS   (%): 43.07                                     
+> MATTHEWS COEFFICIENT, VM (ANGSTROMS^3/DA): 2.16                     
+> CRYSTALLIZATION CONDITIONS: 27-31% PEG 300, 48 MM CITRIC ACID, 35 MM NAH2PO4, PH 4.5, VAPOR DIFFUSION, HANGING DROP, TEMPERATURE 293K 
+
+Based on the content of the crystallization buffer, we assume that the solid protein crystal has a very similar pH and salt concentration as an actual buffer solution. We also model 35 MM NAH2PO4 as simple sodium chloride NACL with 0.035 M concentration. 
+
+- We ignore PEG and a weak citric acid as well and don't model it in a system.
+
+- Analyzing the solvent content of the crystal, 43% by volume, we can estimate the number of water molecules needed to be added to the crystal cell (V = 89.106 nm^3): 1282 water molecules, including 94 x 4 = 376 crystal waters. 
+
+- PH 4.5 in the crystal will affect protonation states of charged side chains, such as Histidine, Aspartic and Glutamic acids. See titration curves below:
+
+![](pics/titr.png)
+
+- At pH 4.5, glutamic acid is about 40% protonated. Physically, percent of protonation means how much time on average these functional groups have hydrogen on them vs lose the proton and have a negative net charge. This time dependence is impossible to model with conventional MD, where charges are constant. Modeling of protonation can in principle be done using statistical approach, e.g. by running 100 simulations in total with 40 of them having a hydrogen and 60 - not having the hydrogen; and this is only for one charged side chain. If you have a number of them, statistical approach is not feasible. Thus, in MD, proper protonation modeling is available either for 100% or 0% protonation state. 
+
+- For pH 5, Histidine is mostly (95%) protonated, whereas Aspartic and Glutamic acids are mostly (5% and 15%, respectively) deprotonated. The value of pH 5 is a good approximation for fully protonated Histidine, and fully deprotonated Aspartic and Glutamic acids. 
+
+
+### 1.9 Volume fluctuations in NPT ensemble
+
 
 
