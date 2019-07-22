@@ -34,7 +34,7 @@ Unfortunately, when analysing structural differences between all four pdbs, it's
 
 ### 1.3 Analysis of structural differences
 
- The RMSD analysis was performed in the jupyter notebook file `rmsd_analysis.ipynb`. Here I look at the pairwise rmsd (in Å) between all nine structures taking into account common heavy atoms' positions. (All pdbs have different atom numbers and I had to find the set of common atoms)
+ The RMSD analysis was performed in the jupyter notebook file [rmsd_analysis.ipynb](rmsd_analysis.ipynb). Here I look at the pairwise rmsd (in Å) between all nine structures taking into account common heavy atoms' positions. (All pdbs have different atom numbers and I had to find the set of common atoms)
 
  ![](pics/rmsd_heavy.png)
 
@@ -51,7 +51,15 @@ Further we decided to choose the structure collected in the absence of E-field a
 
 For the simulation of the crystal environment (in the presence and absence of E-field) we decided to use 3 systems: 
 
-1. One subunit of PDZ domain in water. (Lauren) ![](pics/1_su.png)
-2. The full 4-subunits crystal cell. ![](pics/1uc.png)
-3. 3x3x3 grid of 4-subunits crystal cells. ![](pics/27uc.png)
+
+| One subunit of PDZ domain in water (Lauren)            |  The full 4-subunits crystal cell | 3x3x3 grid of 4-subunits crystal cells |
+:-------------------------:|:-------------------------:|:-------------------------: 
+![](pics/1_su.png) | ![](pics/1uc.png) | ![](pics/27uc.png) 
+
+
+We need to analyze structural differences between all three approaches. The fixed protein in water is unlikely to behave as the protein in actual crystal since there are no crystal packing forces and flexible temini can move substantially. But it would be interesting to compare these results with the moren natural representation of the crystal - the system with water box dimensions of the same size as crystal unit cell's + periodic boundary conditions. This will presumably describe the protein crystal environment in greater details. 3x3x3 unit cells system is an attempt to describe a protein crystal in a way where the central unit cell doesn't see its periodic image and hencne is considered 'unbiased'. 
+
+- The construction of the one crystal unit cell is done using [charm-gui](http://www.charmm-gui.org/) web-server. It allows to reconstruct the whole crystal cell from the pdb file and the symmetry group: all rotations and translations are applied automatically. The symmetry group for the `289_noE_A` structure in 5e11 is `C 1 2 1`.  
+- The 3x3x3 crystal cell is constructed in the [uc_builder.ipynb](uc_builder.ipynb) script, by extending `a b c` crystallographic axes 3 times and conserving the $$ \alpha \beta \gamma $$ angles.
+
 
