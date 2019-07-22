@@ -6,7 +6,8 @@
 
 ### 1.1 Available structures
 
-There are 4 pdb structures that are deposited to protein data bank as the result of the Rama's paper:
+There are 4 pdb structures that are deposited to protein data bank as the result of the [Rama's Nature paper](https://www.nature.com/articles/nature20571)
+
  - 5e11 (obtained at 289K with no E field - two alternative conformations A and B)
  - 5e22 (obtained at 289K with E field - two alternative conformations A and B as well as two assymetric units)
  - 5e21 (obtained at 277K with no E field - one single conformation)
@@ -118,7 +119,17 @@ Based on the content of the crystallization buffer, we assume that the solid pro
 - For pH 5, Histidine is mostly (95%) protonated, whereas Aspartic and Glutamic acids are mostly (5% and 15%, respectively) deprotonated. The value of pH 5 is a good approximation for fully protonated Histidine, and fully deprotonated Aspartic and Glutamic acids. 
 
 
-### 1.9 Volume fluctuations in NPT ensemble
+### 1.9 Compressibility of the protein crystal
+
+When running MD simulations in NPT ensemble, the value of the compressibility of the system needs to be specified. Compressibility is a measure of the relative volume change of a fluid or solid as a response to a pressure change. Since we are modeling an actual rigid crystal we assume that its compressibility is higher than the one for a protein in water. A brief literature search suggests that for protein crystals the experimentally measured values of compressibility are about `20E-6 bar^-1`. [Source](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.726.4812&rep=rep1&type=pdf) which is twice as higher than the one for the protein in water.
+
+### 1.10 Volume fluctuations in NPT ensemble
+
+The general prodcedure of how to construct a proper crystal system for MD simulation is described [here](https://onlinelibrary.wiley.com/doi/full/10.1002/wcms.1402).
+
+> A standard practice in solvating biomolecules or other chemical systems in simulation boxes of specified dimensions is to tile a box of pre‐equilibrated solvent, such as water or methanol, throughout the simulation. Next, new solvent molecules which clash with the original system are culled. If the initial configuration of the system is to be maintained, restraints can be placed on the system to keep it in place until solvent molecules relax around it. Regardless of the relaxation protocol, the process of removing solvent molecules that clash forms vacuum bubbles if the system relaxes at a constant volume. These vacuum bubbles are removed by further dynamics to equilibrate the system at constant temperature and pressure. It is not uncommon for a simulation of solvated biomolecule to lose 15% or more of it original volume during such a procedure. Crystal simulations, however, must maintain the volume prescribed by the original unit cell throughout equilibration and unrestrained production dynamics.
+
+> In order to keep crystal simulations at the correct volume without vacuum bubbles, it is necessary to add a precise amount of solvent to fill the interstitial voids between the observed asymmetric units of the lattice. The molecular models of both the lattice and the added solvent are important: as shown by Cerutti et al. for a scorpion venom toxin,36 different force fields can require between 681 and 750 water molecules per unit cell, a range of 7% of the overall solvent content, to solvate a protein crystal holding 30% water content by mass. A uniform distribution of solvent should be added throughout the box in a single pass: if added and equilibrated in stages, the solvent can be drawn to one side of the lattice, sweeping ions or other mobile components of the observed asymmetric unit along with it and forcing the system far out of equilibrium when the right amount of solvent is finally reached. In order to add solvent in one pass, some trial and error is necessary. The amount of solvent that will fill out the unit cell after equilibration will have clashes either with the protein of interest or with other solvent particles when it is first introduced. A program for adding solvent should tolerate clashes among newly added solvent particles, anticipating relaxation via energy minimization, but avoid clashes between new solvent particles and the components of the lattice structure that are observed in the X‐ray data. The crystal lattice may be kept in place with positional restraints on some or all of its heavy atoms during this process. Initially, the restraints maintain the structure of the asymmetric unit during energy minimization, but the restraints should also be tapered during the first few nanoseconds of dynamics to maintain the unit cell volume and aspect ratios. If the proper amount of solvent has been added, until it equilibrates under constant pressure the tendency will be to expand the simulation cell beyond the prescribed volume, but over time settling will reduce the simulation volume to some asymptotic value. Most systems with the correct amount of solvent can have restraints removed after ten nanoseconds of dynamics, then remain within 0.3% of the correct unit cell volume for the rest of the simulation.39, 40
 
 
 
