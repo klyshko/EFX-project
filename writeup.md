@@ -14,8 +14,8 @@ There are 4 pdb structures that are deposited to protein data bank as the result
  - 5e1y (obtained at 277K with no E field - three alternative conformations A, B and C (for only one residue))
 
 
-> Note: Laue crystallography is the process when a stationary crystal is illuminated by a polychromatic X-Ray beam.
-> Conventional crystallography is when the moving crystal is illuminated by a monochromatic beam of X-Rays.
+> > Note: Laue crystallography is the process when a stationary crystal is illuminated by a polychromatic X-Ray beam.
+> > Conventional crystallography is when the moving crystal is illuminated by a monochromatic beam of X-Rays.
 
 Two structures at 277 where obtained at the other facility (at the Stanford Synchrotron Radiation Lightsource (SSRL, 11-1) using the PILATUS 6M PAD detector from a single crystal and indexed, integrated, scaled and merged in HKL2000). They were used as a reference to refine structures during EFX experiment, which are obtained at 289K (15C) with Laue crystallography.
 
@@ -35,7 +35,7 @@ Unfortunately, when analysing structural differences between all four pdbs, it's
 
 ### 1.3 Analysis of structural differences
 
- The RMSD analysis was performed in the jupyter notebook file [rmsd_analysis.ipynb](rmsd_analysis.ipynb). Here I look at the pairwise rmsd (in Å) between all nine structures taking into account common heavy atoms' positions. (All pdbs have different atom numbers and I had to find the set of common atoms)
+The RMSD analysis was performed in the jupyter notebook file [rmsd_analysis.ipynb](rmsd_analysis.ipynb). Here I look at the pairwise rmsd (in Å) between all nine structures taking into account common heavy atoms' positions. (All pdbs have different atom numbers and I had to find the set of common atoms)
 
 ![](pics/rmsd_heavy.png)
 
@@ -45,7 +45,7 @@ As expected, the biggest difference is between the conformation of two opposite 
 
 Further we decided to choose the structure collected in the absence of E-field at room temperature and use only alternate conformation A (it has higher occupancy 0.7 vs 0.3 of B); so we pick `289_noE_A` as initial structure for our equlibrium simulations. We assume that equilibration steps will eliminate any diffrence between A and B.
 
-> Need to check it after we're done with the setup.
+> > Need to check it after we're done with the setup.
 
 
 ### 1.5 Design of the crystal
@@ -64,13 +64,13 @@ We need to analyze structural differences between all three approaches. The fixe
 - The construction of the one crystal unit cell is done using [charm-gui](http://www.charmm-gui.org/) web-server. It allows to reconstruct the whole crystal cell from the pdb file and the symmetry group: all rotations and translations are applied automatically. The symmetry group for the `289_noE_A` structure in 5e11 is `C 1 2 1`.
 - The 3x3x3 crystal cell is then constructed in the [uc_builder.ipynb](uc_builder.ipynb) script, by extending `a, b, c` crystallographic axes 3 times and conserving the $\alpha, \beta, \gamma$ angles in the the full 4-subunits crystal cell file.  
 
-> NB: VMD will not represent secondary structures for the pdb files that contain more than 77,000 atoms. Examples are these: [VMD-no-ss](charm-gui/78000_at_noss.pdb) and [VMD-ss](charm-gui/76000_at_ss.pdb). Using different visualizers (NGLView, PyMOL, Chimera) can solve the problem.
+> > NB: VMD will not represent secondary structures for the pdb files that contain more than 77,000 atoms. Examples are these: [VMD-no-ss](charm-gui/78000_at_noss.pdb) and [VMD-ss](charm-gui/76000_at_ss.pdb). Using different visualizers (NGLView, PyMOL, Chimera) can solve the problem.
 
 ### 1.6 Importance of pdb hydrogens
 
 Citation from Lauren's email: 
 
-> By the way, I'm told that the hydrogens in the pdb are known as "riding hydrogens" - it's standard practice in crystallography to include them, as we "kind of know where they should be" and they explain some aspects of the electron density. And they are not entirely invisible to X-ray crystallography. (These are essentially direct quotes from Doeke, first author of the 2016 paper.) 
+> > By the way, I'm told that the hydrogens in the pdb are known as "riding hydrogens" - it's standard practice in crystallography to include them, as we "kind of know where they should be" and they explain some aspects of the electron density. And they are not entirely invisible to X-ray crystallography. (These are essentially direct quotes from Doeke, first author of the 2016 paper.) 
 I think it's ok to ignore the riding hydrogens in the PDB and use the hydrogens which are automatically added in the simulation preparation since we minimize the structure before simulating anyway.
 
 
@@ -78,7 +78,7 @@ I think it's ok to ignore the riding hydrogens in the PDB and use the hydrogens 
 
 Lauren and Mike Socolich, a research scientist in their lab who has done a lot with EFX, suggested to use the positions of crystal waters (i.e those oxygens resoved in the X-Ray crystallography and contained in pdb files) when building the crystal models. We assumed that their importance will be evident from the simulations and conducted a quantitative test where we looked at the positions occupied by crystal oxygens in the original pdb over the equlibrium simulation. Analysis of occupancy of these cites over the course of simulations is performed in [`crystal_water.ipynb`](crystal_water.ipynb) file. 
 
-> **Algorithm description:** Firstly, I load the inital coordinates of crystal oxygens and memorise them. Secondly, at every time step I align current protein structure to the initial one and use these translation vector and rotational matrix to recalculate the positions of crystal water sites. Thirdly, I look at all bulk water oxygens and estimate how many of them are within the cutoff distance to crystal water sites. This will give me a percent of occupied crystal cites out of possible 376 for specific cutoff distance and specific time. The same procedure can be used for analysis how often some random bulk water sites (from initial gro file) are occupied. Lastly, we can compare how much often crystal water sites are occupied in comparison to random averaged over time... More details are in comment section of [`crystal_water.ipynb`](crystal_water.ipynb) file.
+**Algorithm description:** Firstly, I load the inital coordinates of crystal oxygens and memorise them. Secondly, at every time step I align current protein structure to the initial one and use these translation vector and rotational matrix to recalculate the positions of crystal water sites. Thirdly, I look at all bulk water oxygens and estimate how many of them are within the cutoff distance to crystal water sites. This will give me a percent of occupied crystal cites out of possible 376 for specific cutoff distance and specific time. The same procedure can be used for analysis how often some random bulk water sites (from initial gro file) are occupied. Lastly, we can compare how much often crystal water sites are occupied in comparison to random averaged over time... More details are in comment section of [`crystal_water.ipynb`](crystal_water.ipynb) file.
 
 **Main results:**
 
@@ -100,9 +100,9 @@ Intuitively, the last graph represents "something like" radial distribution func
 
 **Lines from the `5e11.pdb` file:**
 
-> CRYSTAL SOLVENT CONTENT, VS   (%): 43.07                                     
-> MATTHEWS COEFFICIENT, VM (ANGSTROMS^3/DA): 2.16                     
-> CRYSTALLIZATION CONDITIONS: 27-31% PEG 300, 48 MM CITRIC ACID, 35 MM NAH2PO4, PH 4.5, VAPOR DIFFUSION, HANGING DROP, TEMPERATURE 293K 
+> > CRYSTAL SOLVENT CONTENT, VS   (%): 43.07                                     
+> > MATTHEWS COEFFICIENT, VM (ANGSTROMS^3/DA): 2.16                     
+> > CRYSTALLIZATION CONDITIONS: 27-31% PEG 300, 48 MM CITRIC ACID, 35 MM NAH2PO4, PH 4.5, VAPOR DIFFUSION, HANGING DROP, TEMPERATURE 293K 
 
 Based on the content of the crystallization buffer, we assume that the solid protein crystal has a very similar pH and salt concentration as an actual buffer solution. We also model 35 MM NAH2PO4 as simple sodium chloride NACL with 0.035 M concentration. 
 
@@ -125,11 +125,31 @@ When running MD simulations in NPT ensemble, the value of the compressibility of
 
 ### 1.10 Volume fluctuations in NPT ensemble
 
-The general prodcedure of how to construct a proper crystal system for MD simulation is described [here](https://onlinelibrary.wiley.com/doi/full/10.1002/wcms.1402).
+The general prodcedure of how to construct a proper crystal system for MD simulation is described [here](https://onlinelibrary.wiley.com/doi/full/10.1002/wcms.1402). In short:
 
-> A standard practice in solvating biomolecules or other chemical systems in simulation boxes of specified dimensions is to tile a box of pre‐equilibrated solvent, such as water or methanol, throughout the simulation. Next, new solvent molecules which clash with the original system are culled. If the initial configuration of the system is to be maintained, restraints can be placed on the system to keep it in place until solvent molecules relax around it. Regardless of the relaxation protocol, the process of removing solvent molecules that clash forms vacuum bubbles if the system relaxes at a constant volume. These vacuum bubbles are removed by further dynamics to equilibrate the system at constant temperature and pressure. It is not uncommon for a simulation of solvated biomolecule to lose 15% or more of it original volume during such a procedure. Crystal simulations, however, must maintain the volume prescribed by the original unit cell throughout equilibration and unrestrained production dynamics.
+When solvating a protein in a crystal cell, the right amount of water have to be added in order to keep crystal simulations at the correct volume. This step is crucially important since the unit cell axes (hence, the volume) should be relatively constant across the whole protein crystall in order to provide a resolvable diffraction pattern. 
 
-> In order to keep crystal simulations at the correct volume without vacuum bubbles, it is necessary to add a precise amount of solvent to fill the interstitial voids between the observed asymmetric units of the lattice. The molecular models of both the lattice and the added solvent are important: as shown by Cerutti et al. for a scorpion venom toxin,36 different force fields can require between 681 and 750 water molecules per unit cell, a range of 7% of the overall solvent content, to solvate a protein crystal holding 30% water content by mass. A uniform distribution of solvent should be added throughout the box in a single pass: if added and equilibrated in stages, the solvent can be drawn to one side of the lattice, sweeping ions or other mobile components of the observed asymmetric unit along with it and forcing the system far out of equilibrium when the right amount of solvent is finally reached. In order to add solvent in one pass, some trial and error is necessary. The amount of solvent that will fill out the unit cell after equilibration will have clashes either with the protein of interest or with other solvent particles when it is first introduced. A program for adding solvent should tolerate clashes among newly added solvent particles, anticipating relaxation via energy minimization, but avoid clashes between new solvent particles and the components of the lattice structure that are observed in the X‐ray data. The crystal lattice may be kept in place with positional restraints on some or all of its heavy atoms during this process. Initially, the restraints maintain the structure of the asymmetric unit during energy minimization, but the restraints should also be tapered during the first few nanoseconds of dynamics to maintain the unit cell volume and aspect ratios. If the proper amount of solvent has been added, until it equilibrates under constant pressure the tendency will be to expand the simulation cell beyond the prescribed volume, but over time settling will reduce the simulation volume to some asymptotic value. Most systems with the correct amount of solvent can have restraints removed after ten nanoseconds of dynamics, then remain within 0.3% of the correct unit cell volume for the rest of the simulation.39, 40
+While equilibrating a system in NVT emsemble, the volume is kept constant by definition. However, if you switch to the NPT ensemble (which EFX experiment is), the volume of the box can fluctuate substantially in order to keep required water density (and pressure) constant. For instance, if the amount of solvent molecules is not sufficient, vacuum voids may form at the NVT step, which will potentially affect the dynamics of the protein. NPT procedure will of course remove the bubbles by adjusting the volume of the unit cell. Nevetherless, we have to avoid large volume fluctuations by choosing the precise amount of water.
+
+Description of the procedure: 
+
+> > As mentioned before, we can estimate the total number of water molecules needed to be added to the crystal cell (43% of solvent content for V = 89.106 nm^3): 1282 water molecules, including 94 x 4 = 376 crystal waters.
+
+1. Solvate the system using standard protocol in GROMACS: a pre-equilibrated box of TIP3P solvent is tiled into crystal cell. The water molecules that clash with the protein are removed from the system. For one unit cell system added: 795
+
+2. Add a number water molecules through `gmx insert-molecules` and modify the topology of the system accordingly. Range 75 to 99 (increment of 4) 
+
+3. Run position restraint (10 ns), NVT (100 ns) and NPT Berendsen (10 ns), NPT Parinello-Raman Isotropic (100 ns) and NPT Parinello-Raman Anisotropic (100 ns) equilibration simulations for each number of molecules added. 
+
+4. Do analysis of the volume fluctuations and find the optimum number of water molecules you have to add in order to reduce volume fluctuations and/or make it as close as posssible to a real unit cell volume.
+
+| Deviation from true volume for N water added |  Volume fluctuations for N = 87 |
+:-------------------------:|:-------------------------:
+![](pics/trend_volume.png) | ![](pics/volume.png) 
+
+The system with the correct amount of solvent remains mostly within 1.0% of the correct unit cell volume for the rest of the simulation. The black vertical line shows a 95% confindence interval, i.e. 95% of the time the system volume fluctuates within these limits. Thus, the optimal number of water molecules for the one unit cell system is N = 87. 
+
+
 
 
 
