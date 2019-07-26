@@ -123,14 +123,14 @@ Based on the content of the crystallization buffer, we assume that the solid pro
 
 When running MD simulations in NPT ensemble, the value of the compressibility of the system needs to be specified. Compressibility is a measure of the relative volume change of a fluid or solid as a response to a pressure change. Since we are modeling an actual rigid crystal we assume that its compressibility is higher than the one for a protein in water. A brief literature search suggests that for protein crystals the experimentally measured values of compressibility are about `20E-6 bar^-1`. [Source](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.726.4812&rep=rep1&type=pdf) which is twice as lower than the one for water (`45E-6 bar^-1`).
 
-### 1.10. Volume fluctuations in NPT ensemble
+### 1.10. Unit cell volume change in NPT ensemble
 
 The general prodcedure of how to construct a proper crystal system for MD simulation is described [here](https://onlinelibrary.wiley.com/doi/full/10.1002/wcms.1402). 
 
 In short:
 When solvating a protein in a crystal cell, the right amount of water have to be added in order to keep crystal simulations at the correct volume. This step is crucially important since the unit cell axes (hence, the volume) should be relatively constant across the whole protein crystall in order to provide a resolvable diffraction pattern. 
 
-While equilibrating a system in NVT emsemble, the volume is kept constant by definition. However, if you switch to the NPT ensemble (which EFX experiment is), the volume of the box can fluctuate substantially in order to keep required water density (and pressure) constant. For instance, if the amount of solvent molecules is not sufficient, vacuum voids may form at the NVT step, which will potentially affect the dynamics of the protein. NPT procedure will of course remove the bubbles by adjusting the volume of the unit cell. Nevetherless, we have to avoid large volume fluctuations by choosing the precise amount of water.
+While equilibrating a system in NVT emsemble, the volume is kept constant by definition. However, if you switch to the NPT ensemble (which EFX experiment is), the volume of the box can change substantially in order to keep required water density (and pressure) constant. For instance, if the amount of solvent molecules is not sufficient, vacuum voids may form at the NVT step, which will potentially affect the dynamics of the protein. NPT procedure will of course remove the bubbles by adjusting the volume of the unit cell. Nevetherless, we have to avoid large volume fluctuations by choosing the precise amount of water.
 
 > As mentioned before, we can estimate the total number of water molecules needed to be added to the crystal cell (43% of solvent content for V = 89.106 nm^3): 1282 water molecules, including 94 x 4 = 376 crystal waters.
 
@@ -164,9 +164,13 @@ We ran the test simulation of **1UC** system with electric field ON in the NVE e
 
 ![](pics/nve.png)
 
-The results demonstrate that the temperature change during the experiment cannot be ignored. We will simulate the system coupled to a heat bath with T = 300K
+The results demonstrate that the temperature change during the experiment cannot be ignored. Since the experiment is done at 289K we will simulate the system coupled to a heat bath with T = 300K, which is reasonable assumptions. 
 
+> There are attempts to measure the temperature of the crystal experimentally...Ongoning work
 
+### 2.2. Stress test of the crystal in electric field
+
+We also ran a set of production simulations with varying E-field (from 1 to 10 MV/cm) to see how well the crystal can withstand high electric fields. 
 
 
 
