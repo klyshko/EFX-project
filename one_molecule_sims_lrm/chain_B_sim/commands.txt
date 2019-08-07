@@ -1,0 +1,8 @@
+gmx pdb2gmx -f repaired-5e11-B.pdb -o init.gro -p init.top -ignh -ter -v
+9 1 1 1
+gmx editconf -f init.gro -o editconf.gro -c -d 1.5 -bt dodecahedron
+gmx solvate -cp editconf.gro -cs spc216 -o solvate.gro -p init.top
+gmx grompp -f em.mdp -c solvate.gro -p init.top -o solvate.tpr
+gmx genion -s solvate.tpr -o solvate_genion.pdb -p init.top -neutral -conc 0.15
+gmx grompp -f em.mdp -c solvate_genion.pdb -p init.top -o em.tpr
+gmx mdrun -s em.tpr

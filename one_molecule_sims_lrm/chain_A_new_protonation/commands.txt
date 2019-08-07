@@ -1,0 +1,602 @@
+gmx pdb2gmx -f repaired-5e11-B.pdb -o init.gro -p init.top -ignh -ter -v -asp -glu -his
+Select the Force Field:
+From '/usr/local/gromacs/share/gromacs/top':
+ 1: AMBER03 protein, nucleic AMBER94 (Duan et al., J. Comp. Chem. 24, 1999-2012, 2003)
+ 2: AMBER94 force field (Cornell et al., JACS 117, 5179-5197, 1995)
+ 3: AMBER96 protein, nucleic AMBER94 (Kollman et al., Acc. Chem. Res. 29, 461-469, 1996)
+ 4: AMBER99 protein, nucleic AMBER94 (Wang et al., J. Comp. Chem. 21, 1049-1074, 2000)
+ 5: AMBER99SB protein, nucleic AMBER94 (Hornak et al., Proteins 65, 712-725, 2006)
+ 6: AMBER99SB-ILDN protein, nucleic AMBER94 (Lindorff-Larsen et al., Proteins 78, 1950-58, 2010)
+ 7: AMBERGS force field (Garcia & Sanbonmatsu, PNAS 99, 2782-2787, 2002)
+ 8: CHARMM27 all-atom force field (CHARM22 plus CMAP for proteins)
+ 9: CHARMM36 all-atom force field (April 2015)
+10: GROMOS96 43a1 force field
+11: GROMOS96 43a2 force field (improved alkane dihedrals)
+12: GROMOS96 45a3 force field (Schuler JCC 2001 22 1205)
+13: GROMOS96 53a5 force field (JCC 2004 vol 25 pag 1656)
+14: GROMOS96 53a6 force field (JCC 2004 vol 25 pag 1656)
+15: GROMOS96 54a7 force field (Eur. Biophys. J. (2011), 40,, 843-856, DOI: 10.1007/s00249-011-0700-9)
+16: OPLS-AA/L all-atom force field (2001 aminoacid dihedrals)
+9
+
+Using the C36m2 force field in directory c36m2.ff
+
+Opening force field file /usr/local/gromacs/share/gromacs/top/c36m2.ff/watermodels.dat
+
+Select the Water Model:
+ 1: TIP3P   TIP 3-point, recommended, by default uses CHARMM TIP3 with LJ on H
+ 2: TIP4P   TIP 4-point
+ 3: TIP5P   TIP 5-point
+ 4: SPC     simple point charge
+ 5: SPC/E   extended simple point charge
+ 6: None
+1
+going to rename c36m2.ff/merged.r2b
+Opening force field file /usr/local/gromacs/share/gromacs/top/c36m2.ff/merged.r2b
+Reading repaired-5e11-B.pdb...
+Read 'LIGAND OF NUMB PROTEIN X 2; 6 PROTEIN 1', 724 atoms
+Renaming atom 'CD1' in residue 337 ILE to 'CD'
+Renaming atom 'CD1' in residue 353 ILE to 'CD'
+Renaming atom 'CD1' in residue 366 ILE to 'CD'
+Renaming atom 'CD1' in residue 390 ILE to 'CD'
+Renaming atom 'CD1' in residue 406 ILE to 'CD'
+Renaming atom 'CD1' in residue 407 ILE to 'CD'
+Renaming atom 'CD1' in residue 418 ILE to 'CD'
+Renaming atom 'CD1' in residue 426 ILE to 'CD'
+Analyzing pdb file
+Splitting chemical chains based on TER records or chain id changing.
+There are 1 chains and 0 blocks of water and 95 residues with 724 atoms
+
+  chain  #res #atoms
+  1 'A'    95    724  
+
+Occupancy for atom GLN339-CD is 0.930000 rather than 1
+Occupancy for atom GLN339-OE1 is 0.430000 rather than 1
+Occupancy for atom GLN339-NE2 is 0.260000 rather than 1
+Occupancy for atom GLN350-N is 0.410000 rather than 1
+Occupancy for atom GLN350-CA is 0.410000 rather than 1
+Occupancy for atom GLN350-C is 0.410000 rather than 1
+Occupancy for atom GLN350-O is 0.410000 rather than 1
+Occupancy for atom GLN350-CB is 0.410000 rather than 1
+Occupancy for atom GLN350-CG is 0.410000 rather than 1
+Occupancy for atom GLN350-CD is 0.410000 rather than 1
+Occupancy for atom GLN350-OE1 is 0.410000 rather than 1
+Occupancy for atom GLN350-NE2 is 0.410000 rather than 1
+Occupancy for atom LEU367-N is 0.390000 rather than 1
+Occupancy for atom LEU367-CA is 0.390000 rather than 1
+Occupancy for atom LEU367-C is 0.390000 rather than 1
+Occupancy for atom LEU367-O is 0.390000 rather than 1
+Occupancy for atom LEU367-CB is 0.390000 rather than 1
+Occupancy for atom LEU367-CG is 0.390000 rather than 1
+Occupancy for atom LEU367-CD1 is 0.390000 rather than 1
+Occupancy for atom LEU367-CD2 is 0.390000 rather than 1
+Occupancy for atom ASP368-N is 0.390000 rather than 1
+Occupancy for atom ASP368-CA is 0.390000 rather than 1
+Occupancy for atom ASP368-C is 0.390000 rather than 1
+Occupancy for atom ASP368-O is 0.390000 rather than 1
+Occupancy for atom ASP368-CB is 0.390000 rather than 1
+Occupancy for atom ASP368-CG is 0.390000 rather than 1
+Occupancy for atom ASP368-OD1 is 0.390000 rather than 1
+Occupancy for atom ASP368-OD2 is 0.390000 rather than 1
+Occupancy for atom LEU369-N is 0.390000 rather than 1
+Occupancy for atom LEU369-CA is 0.390000 rather than 1
+Occupancy for atom LEU369-C is 0.390000 rather than 1
+Occupancy for atom LEU369-O is 0.390000 rather than 1
+Occupancy for atom LEU369-CB is 0.390000 rather than 1
+Occupancy for atom LEU369-CG is 0.390000 rather than 1
+Occupancy for atom LEU369-CD1 is 0.390000 rather than 1
+Occupancy for atom LEU369-CD2 is 0.390000 rather than 1
+Occupancy for atom LEU381-N is 0.200000 rather than 1
+Occupancy for atom LEU381-CA is 0.200000 rather than 1
+Occupancy for atom LEU381-C is 0.200000 rather than 1
+Occupancy for atom LEU381-O is 0.200000 rather than 1
+Occupancy for atom LEU381-CB is 0.200000 rather than 1
+Occupancy for atom LEU381-CG is 0.200000 rather than 1
+Occupancy for atom LEU381-CD1 is 0.200000 rather than 1
+Occupancy for atom LEU381-CD2 is 0.200000 rather than 1
+Occupancy for atom SER382-N is 0.200000 rather than 1
+Occupancy for atom SER382-CA is 0.200000 rather than 1
+Occupancy for atom SER382-C is 0.200000 rather than 1
+Occupancy for atom SER382-O is 0.200000 rather than 1
+Occupancy for atom SER382-CB is 0.200000 rather than 1
+Occupancy for atom SER382-OG is 0.200000 rather than 1
+Occupancy for atom SER383-N is 0.200000 rather than 1
+Occupancy for atom SER383-CA is 0.200000 rather than 1
+Occupancy for atom SER383-C is 0.200000 rather than 1
+Occupancy for atom SER383-O is 0.200000 rather than 1
+Occupancy for atom SER383-CB is 0.200000 rather than 1
+Occupancy for atom SER383-OG is 0.200000 rather than 1
+Occupancy for atom ASN384-N is 0.200000 rather than 1
+Occupancy for atom ASN384-CA is 0.200000 rather than 1
+Occupancy for atom ASN384-C is 0.200000 rather than 1
+Occupancy for atom ASN384-O is 0.200000 rather than 1
+Occupancy for atom ASN384-CB is 0.200000 rather than 1
+Occupancy for atom ASN384-CG is 0.200000 rather than 1
+Occupancy for atom ASN384-OD1 is 0.200000 rather than 1
+Occupancy for atom ASN384-ND2 is 0.200000 rather than 1
+Occupancy for atom ARG413-N is 0.330000 rather than 1
+Occupancy for atom ARG413-CA is 0.330000 rather than 1
+Occupancy for atom ARG413-C is 0.330000 rather than 1
+Occupancy for atom ARG413-O is 0.330000 rather than 1
+Occupancy for atom ARG413-CB is 0.330000 rather than 1
+Occupancy for atom ARG413-CG is 0.330000 rather than 1
+Occupancy for atom ARG413-CD is 0.330000 rather than 1
+Occupancy for atom ARG413-NE is 0.330000 rather than 1
+Occupancy for atom ARG413-CZ is 0.330000 rather than 1
+Occupancy for atom ARG413-NH1 is 0.330000 rather than 1
+Occupancy for atom ARG413-NH2 is 0.330000 rather than 1
+Occupancy for atom VAL414-N is 0.330000 rather than 1
+Occupancy for atom VAL414-CA is 0.330000 rather than 1
+Occupancy for atom VAL414-C is 0.330000 rather than 1
+Occupancy for atom VAL414-O is 0.330000 rather than 1
+Occupancy for atom VAL414-CB is 0.330000 rather than 1
+Occupancy for atom VAL414-CG1 is 0.330000 rather than 1
+Occupancy for atom VAL414-CG2 is 0.330000 rather than 1
+Occupancy for atom ASN415-N is 0.330000 rather than 1
+Occupancy for atom ASN415-CA is 0.330000 rather than 1
+Occupancy for atom ASN415-C is 0.330000 rather than 1
+Occupancy for atom ASN415-O is 0.330000 rather than 1
+Occupancy for atom ASN415-CB is 0.330000 rather than 1
+Occupancy for atom ASN415-CG is 0.330000 rather than 1
+Occupancy for atom ASN415-OD1 is 0.330000 rather than 1
+Occupancy for atom ASN415-ND2 is 0.330000 rather than 1
+Occupancy for atom LEU416-N is 0.330000 rather than 1
+Occupancy for atom LEU416-CA is 0.330000 rather than 1
+Occupancy for atom LEU416-C is 0.330000 rather than 1
+Occupancy for atom LEU416-O is 0.330000 rather than 1
+Occupancy for atom LEU416-CB is 0.330000 rather than 1
+Occupancy for atom LEU416-CG is 0.330000 rather than 1
+Occupancy for atom LEU416-CD1 is 0.330000 rather than 1
+Occupancy for atom LEU416-CD2 is 0.330000 rather than 1
+Occupancy for atom THR417-N is 0.330000 rather than 1
+Occupancy for atom THR417-CA is 0.330000 rather than 1
+Occupancy for atom THR417-C is 0.330000 rather than 1
+Occupancy for atom THR417-O is 0.330000 rather than 1
+Occupancy for atom THR417-CB is 0.330000 rather than 1
+Occupancy for atom THR417-OG1 is 0.330000 rather than 1
+Occupancy for atom THR417-CG2 is 0.330000 rather than 1
+Occupancy for atom ILE418-N is 0.330000 rather than 1
+Occupancy for atom ILE418-CA is 0.330000 rather than 1
+Occupancy for atom ILE418-C is 0.330000 rather than 1
+Occupancy for atom ILE418-O is 0.330000 rather than 1
+Occupancy for atom ILE418-CB is 0.330000 rather than 1
+Occupancy for atom ILE418-CG1 is 0.330000 rather than 1
+Occupancy for atom ILE418-CG2 is 0.330000 rather than 1
+Occupancy for atom ILE418-CD is 0.330000 rather than 1
+
+WARNING: there were 0 atoms with zero occupancy and 113 atoms with
+         occupancy unequal to one (out of 724 atoms). Check your pdb file.
+
+Opening force field file /usr/local/gromacs/share/gromacs/top/c36m2.ff/atomtypes.atp
+Atomtype 81
+Reading residue database... (C36m2)
+Opening force field file /usr/local/gromacs/share/gromacs/top/c36m2.ff/merged.rtp
+Residue 44
+Sorting it all out...
+Opening force field file /usr/local/gromacs/share/gromacs/top/c36m2.ff/merged.hdb
+Opening force field file /usr/local/gromacs/share/gromacs/top/c36m2.ff/merged.n.tdb
+Opening force field file /usr/local/gromacs/share/gromacs/top/c36m2.ff/merged.c.tdb
+Processing chain 1 'A' (724 atoms, 95 residues)
+Which ASPARTIC ACID type do you want for residue 13
+0. Not protonated (charge -1) (ASP)
+1. Protonated (charge 0) (ASPP)
+
+Type a number:0
+Which ASPARTIC ACID type do you want for residue 27
+0. Not protonated (charge -1) (ASP)
+1. Protonated (charge 0) (ASPP)
+
+Type a number:0
+Which ASPARTIC ACID type do you want for residue 35
+0. Not protonated (charge -1) (ASP)
+1. Protonated (charge 0) (ASPP)
+
+Type a number:0
+Which ASPARTIC ACID type do you want for residue 45
+0. Not protonated (charge -1) (ASP)
+1. Protonated (charge 0) (ASPP)
+
+Type a number:0
+Which ASPARTIC ACID type do you want for residue 52
+0. Not protonated (charge -1) (ASP)
+1. Protonated (charge 0) (ASPP)
+
+Type a number:0
+Which ASPARTIC ACID type do you want for residue 61
+0. Not protonated (charge -1) (ASP)
+1. Protonated (charge 0) (ASPP)
+
+Type a number:0
+Which GLUTAMIC ACID type do you want for residue 3
+0. Not protonated (charge -1) (GLU)
+1. Protonated (charge 0) (GLUP)
+
+Type a number:0
+Which GLUTAMIC ACID type do you want for residue 16
+0. Not protonated (charge -1) (GLU)
+1. Protonated (charge 0) (GLUP)
+
+Type a number:0
+Which GLUTAMIC ACID type do you want for residue 28
+0. Not protonated (charge -1) (GLU)
+1. Protonated (charge 0) (GLUP)
+
+Type a number:0
+Which GLUTAMIC ACID type do you want for residue 38
+0. Not protonated (charge -1) (GLU)
+1. Protonated (charge 0) (GLUP)
+
+Type a number:0
+Which GLUTAMIC ACID type do you want for residue 68
+0. Not protonated (charge -1) (GLU)
+1. Protonated (charge 0) (GLUP)
+
+Type a number:0
+Which GLUTAMIC ACID type do you want for residue 79
+0. Not protonated (charge -1) (GLU)
+1. Protonated (charge 0) (GLUP)
+
+Type a number:0
+Which GLUTAMIC ACID type do you want for residue 92
+0. Not protonated (charge -1) (GLU)
+1. Protonated (charge 0) (GLUP)
+
+Type a number:0
+Which GLUTAMIC ACID type do you want for residue 94
+0. Not protonated (charge -1) (GLU)
+1. Protonated (charge 0) (GLUP)
+
+Type a number:0
+Which HISTIDINE type do you want for residue 10
+0. H on ND1 only (HSD)
+1. H on NE2 only (HSE)
+2. H on ND1 and NE2 (HSP)
+3. Coupled to Heme (HSD)
+
+Type a number:2
+Which HISTIDINE type do you want for residue 60
+0. H on ND1 only (HSD)
+1. H on NE2 only (HSE)
+2. H on ND1 and NE2 (HSP)
+3. Coupled to Heme (HSD)
+
+Type a number:2
+Identified residue SER334 as a starting terminus.
+Identified residue LEU428 as a ending terminus.
+8 out of 8 lines of specbond.dat converted successfully
+Special Atom Distance matrix:
+                  MET335  HIS343
+                    SD13   NE278
+  HIS343   NE278   2.436
+  HIS393  NE2457   2.196   1.595
+Changing rtp entry of residue 343 HIS to 'HSP'
+Changing rtp entry of residue 393 HIS to 'HSP'
+Select start terminus type for SER-334
+ 0: NH3+
+ 1: NH2
+ 2: 5TER
+ 3: None
+1
+Start terminus SER-334: NH2
+Select end terminus type for LEU-428
+ 0: COO-
+ 1: COOH
+ 2: CT2
+ 3: 3TER
+ 4: None
+1
+End terminus LEU-428: COOH
+Opening force field file /usr/local/gromacs/share/gromacs/top/c36m2.ff/merged.arn
+Renaming atom 'O' in residue 'LEU' 428 to 'OT1'
+Renaming atom 'OXT' in residue 'LEU' 428 to 'OT2'
+Checking for duplicate atoms....
+Generating any missing hydrogen atoms and/or adding termini.
+Now there are 95 residues with 1473 atoms
+Making bonds...
+Number of bonds was 1480, now 1480
+Generating angles, dihedrals and pairs...
+Before cleaning: 3890 pairs
+Before cleaning: 3920 dihedrals
+Keeping all generated dihedrals
+Making cmap torsions...
+There are   93 cmap torsion pairs
+There are 3920 dihedrals,  264 impropers, 2693 angles
+          3884 pairs,     1480 bonds and     0 virtual sites
+Total mass 10296.786 a.m.u.
+Total charge -1.000 e
+Writing topology
+
+Writing coordinate file...
+		--------- PLEASE NOTE ------------
+You have successfully generated a topology from: repaired-5e11-B.pdb.
+The C36m2 force field and the tip3p water model are used.
+		--------- ETON ESAELP ------------
+
+
+=================================================================================================================================================
+
+
+
+gmx editconf -f init.gro -o editconf.gro -c -d 1.5 -bt dodecahedron
+Read 1473 atoms
+Volume: 89.106 nm^3, corresponds to roughly 40000 electrons
+No velocities found
+    system size :  2.823  3.825  4.572 (nm)
+    diameter    :  5.163               (nm)
+    center      :  1.127  1.426  0.891 (nm)
+    box vectors :  6.530  3.945  3.901 (nm)
+    box angles  :  90.00 117.54  90.00 (degrees)
+    box volume  :  89.11               (nm^3)
+    shift       :  4.996  4.696  1.995 (nm)
+new center      :  6.122  6.122  2.886 (nm)
+new box vectors :  8.163  8.163  8.163 (nm)
+new box angles  :  60.00  60.00  90.00 (degrees)
+new box volume  : 384.62               (nm^3)
+
+
+
+==================================================================================================================================================
+
+
+
+
+gmx solvate -cp editconf.gro -cs spc216 -o solvate.gro -p init.top
+Generating solvent configuration
+Will generate new solvent configuration of 5x5x4 boxes
+Solvent box contains 43785 atoms in 14595 residues
+Removed 6078 solvent atoms due to solvent-solvent overlap
+Removed 1374 solvent atoms due to solute-solvent overlap
+Sorting configuration
+Found 1 molecule type:
+    SOL (   3 atoms): 12111 residues
+Generated solvent containing 36333 atoms in 12111 residues
+Writing generated configuration to solvate.gro
+
+Output configuration contains 37806 atoms in 12206 residues
+Volume                 :     384.616 (nm^3)
+Density                :     989.633 (g/l)
+Number of solvent molecules:  12111   
+
+Processing topology
+Adding line for 12111 solvent molecules with resname (SOL) to topology file (init.top)
+
+Back Off! I just backed up init.top to ./#init.top.1#
+
+
+
+
+================================================================================================================================================
+
+
+
+
+
+gmx grompp -f em.mdp -c solvate.gro -p init.top -o solvate.tpr
+NOTE 1 [file em.mdp, line 12]:
+  em.mdp did not specify a value for the .mdp option "cutoff-scheme".
+  Probably it was first intended for use with GROMACS before 4.6. In 4.6,
+  the Verlet scheme was introduced, but the group scheme was still the
+  default. The default is now the Verlet scheme, so you will observe
+  different behaviour.
+
+Setting the LD random seed to 1328238818
+Generated 3317 of the 3321 non-bonded parameter combinations
+Generating 1-4 interactions: fudge = 1
+Generated 2515 of the 3321 1-4 parameter combinations
+Excluding 3 bonded neighbours molecule type 'Protein_chain_A'
+Excluding 2 bonded neighbours molecule type 'SOL'
+
+NOTE 2 [file init.top, line 13975]:
+  System has non-zero total charge: -1.000000
+  Total charge should normally be an integer. See
+  http://www.gromacs.org/Documentation/Floating_Point_Arithmetic
+  for discussion on how close it should be to an integer.
+  
+
+
+
+WARNING 1 [file init.top, line 13975]:
+  You are using Ewald electrostatics in a system with net charge. This can
+  lead to severe artifacts, such as ions moving into regions with low
+  dielectric, due to the uniform background charge. We suggest to
+  neutralize your system with counter ions, possibly in combination with a
+  physiological salt concentration.
+
+
+++++ PLEASE READ AND CITE THE FOLLOWING REFERENCE ++++
+J. S. Hub, B. L. de Groot, H. Grubmueller, G. Groenhof
+Quantifying Artifacts in Ewald Simulations of Inhomogeneous Systems with a Net
+Charge
+J. Chem. Theory Comput. 10 (2014) pp. 381-393
+-------- -------- --- Thank You --- -------- --------
+
+Removing all charge groups because cutoff-scheme=Verlet
+Analysing residue names:
+There are:    95    Protein residues
+There are: 12111      Water residues
+Analysing Protein...
+Number of degrees of freedom in T-Coupling group rest is 77082.00
+Calculating fourier grid dimensions for X Y Z
+Using a fourier grid of 72x72x72, spacing 0.113 0.113 0.113
+Estimate for the relative computational load of the PME mesh part: 0.09
+This run will generate roughly 110 Mb of data
+
+There were 2 notes
+
+There was 1 warning
+
+
+
+
+========================================================================================================================================
+
+
+
+
+
+gmx genion -s solvate.tpr -o solvate_genion.pdb -p init.top -neutral -conc 0.15
+Will try to add 36 NA ions and 35 CL ions.
+Select a continuous group of solvent molecules
+Group     0 (         System) has 37806 elements
+Group     1 (        Protein) has  1473 elements
+Group     2 (      Protein-H) has   724 elements
+Group     3 (        C-alpha) has    95 elements
+Group     4 (       Backbone) has   285 elements
+Group     5 (      MainChain) has   379 elements
+Group     6 (   MainChain+Cb) has   464 elements
+Group     7 (    MainChain+H) has   469 elements
+Group     8 (      SideChain) has  1004 elements
+Group     9 (    SideChain-H) has   345 elements
+Group    10 (    Prot-Masses) has  1473 elements
+Group    11 (    non-Protein) has 36333 elements
+Group    12 (          Water) has 36333 elements
+Group    13 (            SOL) has 36333 elements
+Group    14 (      non-Water) has  1473 elements
+Select a group: 13
+Selected 13: 'SOL'
+Number of (3-atomic) solvent molecules: 12111
+
+Processing topology
+Replacing 71 solute molecules in topology file (init.top)  by 36 NA and 35 CL ions.
+
+Back Off! I just backed up init.top to ./#init.top.2#
+Using random seed 692196709.
+Replacing solvent molecule 6861 (atom 22056) with NA
+Replacing solvent molecule 9256 (atom 29241) with NA
+Replacing solvent molecule 2756 (atom 9741) with NA
+Replacing solvent molecule 11467 (atom 35874) with NA
+Replacing solvent molecule 3921 (atom 13236) with NA
+Replacing solvent molecule 10431 (atom 32766) with NA
+Replacing solvent molecule 1947 (atom 7314) with NA
+Replacing solvent molecule 9631 (atom 30366) with NA
+Replacing solvent molecule 8939 (atom 28290) with NA
+Replacing solvent molecule 1488 (atom 5937) with NA
+Replacing solvent molecule 3465 (atom 11868) with NA
+Replacing solvent molecule 7207 (atom 23094) with NA
+Replacing solvent molecule 465 (atom 2868) with NA
+Replacing solvent molecule 10542 (atom 33099) with NA
+Replacing solvent molecule 11524 (atom 36045) with NA
+Replacing solvent molecule 2528 (atom 9057) with NA
+Replacing solvent molecule 5435 (atom 17778) with NA
+Replacing solvent molecule 4122 (atom 13839) with NA
+Replacing solvent molecule 11260 (atom 35253) with NA
+Replacing solvent molecule 11197 (atom 35064) with NA
+Replacing solvent molecule 7618 (atom 24327) with NA
+Replacing solvent molecule 1179 (atom 5010) with NA
+Replacing solvent molecule 7463 (atom 23862) with NA
+Replacing solvent molecule 474 (atom 2895) with NA
+Replacing solvent molecule 217 (atom 2124) with NA
+Replacing solvent molecule 11680 (atom 36513) with NA
+Replacing solvent molecule 6046 (atom 19611) with NA
+Replacing solvent molecule 6086 (atom 19731) with NA
+Replacing solvent molecule 3086 (atom 10731) with NA
+Replacing solvent molecule 11095 (atom 34758) with NA
+Replacing solvent molecule 5734 (atom 18675) with NA
+Replacing solvent molecule 6100 (atom 19773) with NA
+Replacing solvent molecule 7292 (atom 23349) with NA
+Replacing solvent molecule 1140 (atom 4893) with NA
+Replacing solvent molecule 2859 (atom 10050) with NA
+Replacing solvent molecule 7406 (atom 23691) with NA
+Replacing solvent molecule 9497 (atom 29964) with CL
+Replacing solvent molecule 5983 (atom 19422) with CL
+Replacing solvent molecule 10473 (atom 32892) with CL
+Replacing solvent molecule 471 (atom 2886) with CL
+Replacing solvent molecule 11752 (atom 36729) with CL
+Replacing solvent molecule 11315 (atom 35418) with CL
+Replacing solvent molecule 7236 (atom 23181) with CL
+Replacing solvent molecule 9376 (atom 29601) with CL
+Replacing solvent molecule 9323 (atom 29442) with CL
+Replacing solvent molecule 505 (atom 2988) with CL
+Replacing solvent molecule 8947 (atom 28314) with CL
+Replacing solvent molecule 10893 (atom 34152) with CL
+Replacing solvent molecule 5084 (atom 16725) with CL
+Replacing solvent molecule 4682 (atom 15519) with CL
+Replacing solvent molecule 1762 (atom 6759) with CL
+Replacing solvent molecule 8013 (atom 25512) with CL
+Replacing solvent molecule 10206 (atom 32091) with CL
+Replacing solvent molecule 7766 (atom 24771) with CL
+Replacing solvent molecule 8413 (atom 26712) with CL
+Replacing solvent molecule 90 (atom 1743) with CL
+Replacing solvent molecule 1604 (atom 6285) with CL
+Replacing solvent molecule 4404 (atom 14685) with CL
+Replacing solvent molecule 3916 (atom 13221) with CL
+Replacing solvent molecule 224 (atom 2145) with CL
+Replacing solvent molecule 2041 (atom 7596) with CL
+Replacing solvent molecule 9140 (atom 28893) with CL
+Replacing solvent molecule 10706 (atom 33591) with CL
+Replacing solvent molecule 312 (atom 2409) with CL
+Replacing solvent molecule 8589 (atom 27240) with CL
+Replacing solvent molecule 2973 (atom 10392) with CL
+Replacing solvent molecule 1730 (atom 6663) with CL
+Replacing solvent molecule 2813 (atom 9912) with CL
+Replacing solvent molecule 38 (atom 1587) with CL
+Replacing solvent molecule 11896 (atom 37161) with CL
+Replacing solvent molecule 1871 (atom 7086) with CL
+
+
+
+
+===============================================================================================================================
+
+
+
+
+gmx grompp -f em.mdp -c solvate_genion.pdb -p init.top -o em.tpr
+NOTE 1 [file em.mdp, line 12]:
+  em.mdp did not specify a value for the .mdp option "cutoff-scheme".
+  Probably it was first intended for use with GROMACS before 4.6. In 4.6,
+  the Verlet scheme was introduced, but the group scheme was still the
+  default. The default is now the Verlet scheme, so you will observe
+  different behaviour.
+
+Setting the LD random seed to 1911121871
+Generated 3317 of the 3321 non-bonded parameter combinations
+Generating 1-4 interactions: fudge = 1
+Generated 2515 of the 3321 1-4 parameter combinations
+Excluding 3 bonded neighbours molecule type 'Protein_chain_A'
+Excluding 2 bonded neighbours molecule type 'SOL'
+Excluding 1 bonded neighbours molecule type 'NA'
+Excluding 1 bonded neighbours molecule type 'CL'
+Removing all charge groups because cutoff-scheme=Verlet
+Analysing residue names:
+There are:    95    Protein residues
+There are: 12040      Water residues
+There are:    71        Ion residues
+Analysing Protein...
+Analysing residues not classified as Protein/DNA/RNA/Water and splitting into groups...
+Number of degrees of freedom in T-Coupling group rest is 76869.00
+Calculating fourier grid dimensions for X Y Z
+Using a fourier grid of 72x72x72, spacing 0.113 0.113 0.113
+Estimate for the relative computational load of the PME mesh part: 0.09
+This run will generate roughly 110 Mb of data
+
+
+
+
+=============================================================================================================================
+
+
+
+
+gmx mdrun -s em.tpr
+
+Energy minimization has stopped, but the forces have not converged to the
+requested precision Fmax < 10 (which may not be possible for your system). It
+stopped because the algorithm tried to make a new step whose size was too
+small, or there was no change in the energy since last step. Either way, we
+regard the minimization as converged to within the available machine
+precision, given your starting configuration and EM parameters.
+
+Double precision normally gives you higher accuracy, but this is often not
+needed for preparing to run molecular dynamics.
+You might need to increase your constraint accuracy, or turn
+off constraints altogether (set constraints = none in mdp file)
+
+writing lowest energy coordinates.
+
+Steepest Descents converged to machine precision in 14714 steps,
+but did not reach the requested Fmax < 10.
+Potential Energy  = -6.4864138e+05
+Maximum force     =  4.7038043e+02 on atom 1470
+Norm of force     =  4.0419494e+00
+
