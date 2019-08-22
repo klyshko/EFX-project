@@ -17,11 +17,11 @@ There are 4 pdb structures that are deposited to protein data bank as the result
 > Note: Laue crystallography is the process when a stationary crystal is illuminated by a polychromatic X-Ray beam.
 > Conventional crystallography is when the moving crystal is illuminated by a monochromatic beam of X-Rays.
 
-Two structures at 277 where obtained at the other facility (at the Stanford Synchrotron Radiation Lightsource (SSRL, 11-1) using the PILATUS 6M PAD detector from a single crystal and indexed, integrated, scaled and merged in HKL2000). They were used as a reference to refine structures during EFX experiment, which are obtained at 289K (15C) with Laue crystallography.
+Two structures at 277 K where obtained at the other facility (at the Stanford Synchrotron Radiation Lightsource (SSRL, 11-1) using the PILATUS 6M PAD detector from a single crystal and indexed, integrated, scaled and merged in HKL2000). They were used as a reference to refine structures during EFX experiment, which are obtained at 289K (15C) with Laue crystallography.
 
 ### 1.2. Isolation of alternate conformations
 
-Unfortunately, when analysing structural differences between all four pdbs, it's important to isolate alternative conformations, such as A and B. Overall I extracted 9 structures (index A, B or s indicate conformation A, B or single, respectively; E1, E2 or noE indicate the presence or absence of electric field and its direction):
+When analysing structural differences between all four pdbs, it's important to isolate alternative conformations, such as A and B. Overall, we extracted 9 structures (index A, B or s indicate conformation A, B or single, respectively; E1, E2 or noE indicate the presence or absence of electric field and its direction):
 
 - `277_noE_A`
 - `277_noE_B`
@@ -39,11 +39,11 @@ The RMSD analysis was performed in the jupyter notebook file [rmsd_analysis.ipyn
 
 ![](pics/rmsd_heavy.png)
 
-As expected, the biggest difference is between the conformation of two opposite electric field directions (1.1 Å). Although I expected much bigger difference. 
+As expected, the biggest difference is between the conformation of two opposite electric field directions (1.1 Å). Although, we expected much bigger difference. 
 
 ### 1.4. Choice of the structure for the simulation - `289_noE_A`
 
-Further we decided to choose the structure collected in the absence of E-field at room temperature and use only alternate conformation A (it has higher occupancy 0.7 vs 0.3 of B); so we pick `289_noE_A` as initial structure for our equlibrium simulations. We assume that equilibration steps will eliminate any diffrence between A and B.
+Further we decided to choose the structure collected in the absence of E-field at room temperature (289 K) and use only alternate conformation A (it has higher occupancy 0.7 vs 0.3 of B); so we pick `289_noE_A` as initial structure for our modelling. We assume that equilibration steps will eliminate any diffrence between A and B.
 
 > Need to check it after we're done with the setup.
 
@@ -58,11 +58,25 @@ For the simulation of the crystal environment (in the presence and absence of E-
 ![](pics/1_su.png) | ![](pics/1uc.png) | ![](pics/27uc.png) 
 
 
-We need to analyze structural differences between all three approaches. The fixed protein in water is unlikely to behave as the protein in actual crystal since there are no crystal packing forces and flexible temini can move substantially. But it would be interesting to compare these results with the moren natural representation of the crystal - the system with water box dimensions of the same size as crystal unit cell's + periodic boundary conditions. This will presumably describe the protein crystal environment in greater details. 3x3x3 unit cells system is an attempt to describe a protein crystal in a way where the central unit cell doesn't see its periodic image and hencne is considered 'unbiased'. 
+We need to analyze structural differences between all three models. The fixed protein in water (**1SU**) is unlikely to behave as the protein in an actual crystal since there are no crystal packing forces and flexible termini can move substantially due to the thermal fluctuations. We want to compare this behavior with more natural representation of the crystal - the system with the same box dimensions as crystal's unit cell (**1UC**) + periodic boundary conditions. This will presumably mimic the protein crystal environment. However, the proteins in the unit cell will see their periodic image, which should be avoided. Thus, 3x3x3 unit cells system (**27UC**) is an attempt to describe a protein crystal in a way where the central unit cell doesn't see its periodic image and hence dynamics is considered 'unperturbed'. 
 
-- Single PDZ subunit is extracted from a pdb file by just leaving one of the subunits in a text editor.
-- The construction of the one crystal unit cell is done using [charm-gui](http://www.charmm-gui.org/) web-server. It allows to reconstruct the whole crystal cell from the pdb file and the symmetry group: all rotations and translations are applied automatically. The symmetry group for the `289_noE_A` structure in 5e11 is `C 1 2 1`.
-- The 3x3x3 crystal cell is then constructed in the [uc_builder.ipynb](uc_builder.ipynb) script, by extending `a, b, c` crystallographic axes 3 times and conserving the $\alpha, \beta, \gamma$ angles in the the full 4-subunits crystal cell file.  
+- Single PDZ subunit (**1SU**) is extracted from a pdb file (`289_noE_A`) in a text editor. 
+
+- In the PDB there are missing atoms:
+
+> REMARK 470 MISSING ATOM                                                         
+> REMARK 470 THE FOLLOWING RESIDUES HAVE MISSING ATOMS (M=MODEL NUMBER;           
+> REMARK 470 RES=RESIDUE NAME; C=CHAIN IDENTIFIER; SSEQ=SEQUENCE NUMBER;          
+> REMARK 470 I=INSERTION CODE):                                                   
+> REMARK 470   M RES CSSEQI  ATOMS                                                
+> REMARK 470     LYS A 396    CE   NZ                                             
+> REMARK 470     GLU A 401    CD   OE1  OE2 
+
+These atoms should be included in the structure first, [charm-gui](http://www.charmm-gui.org/) web-server is used fot this purpose.
+
+- The construction of one unit cell (**1UC**) is done using [charm-gui](http://www.charmm-gui.org/) web-server as well. It allows to reconstruct the whole crystal cell from the pdb file and the symmetry group provided in the file: all rotations and translations are applied automatically. The symmetry group for the `289_noE_A` structure in 5e11 is `C 1 2 1`.
+
+- The supercell system (**27UC**) is then constructed in the [uc_builder.ipynb](uc_builder.ipynb) script, by extending `a, b, c` crystallographic axes 3 times and conserving `alpha, beta, gamma` angles in the the full 4-subunits crystal cell file.  
 
 > NB: VMD will not represent secondary structures for the pdb files that contain more than 77,000 atoms. Examples are these: [VMD-no-ss](charmm-gui/78000_at_noss.pdb) and [VMD-ss](charmm-gui/76000_at_ss.pdb). Using different visualizers (NGLView, PyMOL, Chimera) can solve the problem.
 
@@ -76,13 +90,13 @@ I think it's ok to ignore the riding hydrogens in the PDB and use the hydrogens 
 
 ### 1.7. Importance of using crystal waters
 
-Lauren and Mike Socolich, a research scientist in their lab who has done a lot with EFX, suggested to use the positions of crystal waters (i.e those oxygens resoved in the X-Ray crystallography and contained in pdb files) when building the crystal models. We assumed that their importance will be evident from the simulations and conducted a quantitative test where we looked at the positions occupied by crystal oxygens in the original pdb over the equlibrium simulation. Analysis of occupancy of these cites over the course of simulations is performed in [`crystal_water.ipynb`](crystal_water.ipynb) file. 
+Lauren and Mike Socolich, a research scientist in their lab who has done a lot with EFX, suggested to use the positions of crystal waters (i.e those oxygens resoved in the X-Ray crystallography and contained in pdb files) when building the crystal models. We assumed that their importance will be evident from the simulations and conducted a quantitative test where we looked at the positions occupied by crystal oxygens in the original pdb over the equlibrium simulation. Analysis of occupancy of these cites over the course of simulations is performed in [`crystal_water.ipynb`](crystal_water.ipynb) file for **1UC** system. 
 
-**Algorithm description:** Firstly, I load the inital coordinates of crystal oxygens and memorise them. Secondly, at every time step I align current protein structure to the initial one and use these translation vector and rotational matrix to recalculate the positions of crystal water sites. Thirdly, I look at all bulk water oxygens and estimate how many of them are within the cutoff distance to crystal water sites. This will give me a percent of occupied crystal cites out of possible 376 for specific cutoff distance and specific time. The same procedure can be used for analysis how often some random bulk water sites (from initial gro file) are occupied. Lastly, we can compare how much often crystal water sites are occupied in comparison to random averaged over time... More details are in comment section of [`crystal_water.ipynb`](crystal_water.ipynb) file.
+**Algorithm description:** Firstly, we save the inital coordinates of crystal oxygens. Secondly, at every time step we align current protein structure to the initial one and use these translation vector and rotational matrix to compute the positions of crystal water sites. Thirdly, we go through all bulk water oxygens and estimate how many of them are within the cutoff distance to the crystal waters' oxygen sites. This yields a percent of occupied crystal sites out of possible 376 for a specific cutoff distance and time frame. The same procedure can be used to analyse how often any random bulk water sites (from initial gro file) are occupied at each time step. Lastly, we can compare how more often crystal water sites are occupied in comparison to random water sites averaged over time. More details are in comment section of [`crystal_water.ipynb`](crystal_water.ipynb) file.
 
 **Main results:**
 
-- Occupancy of the crystal water sites vs random water sites (using alignment to initial structure and recalculating of the water coordinates, see the jupyter notebook comments) for a specific cutoff distance [1.0 Å]:
+- Occupancy of the crystal water sites vs random water sites (using alignment to initial structure and recomputing of the water coordinates, see the jupyter notebook comments) for a specific cutoff distance [1.0 Å]:
 
 | Occupancy for each time step for each water site  - cutoff 1.0 Å |  Occupancy for each time step - cutoff 1.0 Å|
 :-------------------------:|:-------------------------:
@@ -92,7 +106,7 @@ Lauren and Mike Socolich, a research scientist in their lab who has done a lot w
 
 ![](pics/occupancy.png)  
 
-Intuitively, the last graph represents "something like" a radial distribution function for the crystal waters. This non-monotoneous function converging to unity shows that at the distance less than 2.0 Å from the crystal sites it is more likely to find a water than from the  bulk water sites... It means these sites serve as "magnets" - crystal water postions are more favorable. Thus, the setup of the crystal cell seems to reproduce this effect.    
+Intuitively, the last graph represents something like "a radial distribution function" for the crystal waters. This non-monotoneous function converging to unity shows that at the distances less than 2.0 Å from the crystal sites, it is more likely to find a water than from the bulk water sites. It means these sites serve as "magnets" - crystal water postions are more favorable in a crystal during simulation. Thus, the setup of the crystal cell seems to reproduce this effect.
 
 
 ### 1.8. Salt concentration and pH
