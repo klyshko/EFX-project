@@ -56,6 +56,8 @@ For the simulation of the crystal environment (in the presence and absence of E-
 | One subunit of PDZ domain in water (Lauren's) [**1SU**]  |  The full 4-subunits crystal cell [**1UC**] | 3x3x3 grid of 4-subunits crystal cells [**27UC**] |
 :-------------------------:|:-------------------------:|:-------------------------: 
 ![](pics/1_su.png) | ![](pics/1uc.png) | ![](pics/27uc.png) 
+:-------------------------:|:-------------------------:|:-------------------------: 
+
 
 
 We need to analyze structural differences between all three models. The fixed protein in water (**1SU**) is unlikely to behave as the protein in an actual crystal since there are no crystal packing forces and flexible termini can move substantially due to the thermal fluctuations. We want to compare this behavior with more natural representation of the crystal - the system with the same box dimensions as crystal's unit cell (**1UC**) + periodic boundary conditions. This will presumably mimic the protein crystal environment. However, the proteins in the unit cell will see their periodic image, which should be avoided. Thus, 3x3x3 unit cells system (**27UC**) is an attempt to describe a protein crystal in a way where the central unit cell doesn't see its periodic image and hence dynamics is considered 'unperturbed'. 
@@ -155,13 +157,19 @@ While equilibrating a system in NVT emsemble, the volume is kept constant by def
 __Description of the procedure:__ 
 
 
-1. Solvate the system using standard GROMACS protocol `gmx solvate`: a pre-equilibrated box of TIP3P solvent is tiled into the crystal cell box. The water molecules that clash with the protein are removed from the system. The number of solvent molecules added for **1UC** - 795; for **27UC** - ???; 
+1. Solvate the system using standard GROMACS protocol `gmx solvate`: a pre-equilibrated box of TIP3P solvent is tiled into the crystal cell box. The water molecules that clash with the protein are removed from the system. The number of solvent molecules added for **1UC** - 795; for **27UC** - 21794; 
 
-2. Add a number water molecules through `gmx insert-molecules` and modify the topology of the system accordingly. Range 75 to 99 (increment of 4) - for **1UC**. And the range from XXX to YYY for **27UC**.
+2. Add a number water molecules through `gmx insert-molecules` and modify the topology of the system accordingly. Range 75 to 99 (increment of 4) - for **1UC**. And the range from 2030 to 2200 for **27UC**.
 
-3. Run position restraint (10 ns), NVT (100 ns) and NPT Berendsen (10 ns), NPT Parinello-Rahman Isotropic (100 ns) and NPT Parinello-Rahman Anisotropic (100 ns) equilibration simulations for each number of molecules added. 
+3. Run position restraint (2 ns), NVT (10 ns) and NPT Berendsen (10 ns), and NPT Parinello-Rahman Anisotropic (100 ns) equilibration for each number of extra added water molecules. 
 
-4. Do analysis of the volume fluctuations and find the optimal number of water molecules to add that minimize volume fluctuations and make it as close as posssible to a real unit cell volume.
+> Note: the simulations of **1UC** crashed when using anisotropic PR algorithm, after the simulation box flattened in one of the directions. The problem is believed to be caused by the interactions with the periodic image. In order to avoid crashing we switched to the isotropic pressure coupling algorithm. It helped, however this algorithm couldn't equilibrate the pressure in the **27UC** system when all-bond constraints with 4fs time step were used. As a result of trial-and-error search, we decided to: 
+- exclude **1UC** system from out project (reason: interaction with periodic image)
+- not to use isotropic pressure coupling for any crystal simulations (reason: crystal is a rigid system with high protein content and is anisotropic by nature)
+- use isotropic pressure coupling algorithm for a protein in water **1SU** (reason: 90% of the system is water, which is a isotropic system by nature)
+- not to use virtual sites for hygrogens, thus compute with 2fs time step and h-bonds constraints (reason: it creates difficulties with pressure coupling algorithms)
+
+4. Do analysis of the volume changes and find the optimal number of water molecules to add that minimize volume fluctuations and keep the volume as close as posssible to a real unit cell volume: V = 2405.8 nm^3 for **27UC**.
 
 | Relative deviation from the true volume for a range of water added |  Volume fluctuations for N = 87 H2O molecules|
 :-------------------------:|:-------------------------:
