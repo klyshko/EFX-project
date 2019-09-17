@@ -189,15 +189,20 @@ The system with the correct amount of solvent remains mostly within 1.0% of the 
 
 ### 2.1. Choice of temperature of equilibration
 
-In order to test how well our MD simulations capture the properties of the crystal in the absence of electric field, we have to compare experimental observables (such as B-factors and the average crystal structure contained in the PDB) to the data that is available from the simulations. Since the experiment was done at 289 K, we expect that in the absence of the electric field, observed atomic fluctuations (RMSF) will be similar to those simulated at 289K. Root mean square fluctuations are computed relative to the aligned average structure. Simulation B-factors can be estimated using the formula: B_i = 8 * pi / 3 * (rmsf_i)^2. 
+In order to test how well our MD simulations capture the properties of the crystal in the absence of electric field, we have to compare experimental observables (such as B-factors and the average crystal structure contained in the PDB) to the data that is available from the simulations. Since the experiment was done at 289 K, we expect that in the absence of the electric field, observed atomic fluctuations (RMSF) will be similar to those simulated at 289K. Root mean square fluctuations are computed relative to the aligned average structure. Simulation B-factors for each atom can be estimated using the formula: B_i = 8 * pi / 3 * (rmsf_i)^2. 
 
-> NB: Experimental B-factors (anisotropic temperature factors ) are estima
-
-
+We ran a set of simulations of **27UC** for 300 ns with five different temperatures: 289, 291, 294, 297, 300 K and computed B-factors for each temperature. The supercell contains 108 PDZ protein chains, so here we report mean B-factor averaged over 108 chains (with the shaded area as a standard error of the mean).
 
 
-To compare the stability of the crystal in
+| ![](pics/ca/289.png) |  ![](pics/ca/291.png) | ![](pics/ca/294.png)  |
+:-------------------------:|:-------------------------:|:-------------------------:
+| ![](pics/ca/297.png) | ![](pics/ca/300.png) | ![](pics/ca/all_Bfactors_shifted.png) | 
 
+
+
+> NB: Experimental B-factors (anisotropic temperature factors) show the uncertainties in the atomic coordinates obtained in the X-Ray crystallography experiment. The sources of these uncertainties are actual atomic fluctuations, dihedral angle rotations, rigid body motions, crystal imperfections, etc.  In simulations, however, when computing RMSF, we align all the trajectories to the reference structure (typically, energy minimized conformation), as such we control for rigid body motions and crystal structure defects. This might be the reason we observe a different baseline for B-factors curve. Plus, from simulations, we know the coordinates precisely, whereas the experiment has a resolution of 1.5 Å. Not sure if this is actually important.
+
+![](pics/Utotal.png)
 
 ## 3. Test simulations with electric field
 
