@@ -56,6 +56,9 @@ For the simulation of the crystal environment (in the presence and absence of E-
 | One subunit of PDZ domain in water (Lauren's) [**1SU**]  |  The full 4-subunits crystal cell [**1UC**] | 3x3x3 grid of 4-subunits crystal cells [**27UC**] |
 :-------------------------:|:-------------------------:|:-------------------------: 
 ![](pics/1_su.png) | ![](pics/1uc.png) | ![](pics/27uc.png) 
+
+
+
 :-------------------------:|:-------------------------:|:-------------------------: 
 
 
@@ -139,7 +142,7 @@ Based on the content of the crystallization buffer, we assume that the solid pro
 
 When running MD simulations in NPT ensemble, the value of the compressibility of the system needs to be specified. Compressibility is a measure of the relative volume change of a fluid or solid as a response to a pressure change. Since we are modeling an actual rigid crystal we assume that its compressibility is higher than the one for a protein in water. A brief literature search suggests that for protein crystals the experimentally measured values of compressibility are about `20E-6 bar^-1`. [Source](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.726.4812&rep=rep1&type=pdf) which is twice as lower than the one for water (`45E-6 bar^-1`).
 
-### 1.10. Unit cell volume change in NPT ensemble
+### 1.10. Solvation of the crystal - choice of number of water molecules
 
 The general prodcedure of how to construct a proper crystal system for MD simulation is described [here](https://onlinelibrary.wiley.com/doi/full/10.1002/wcms.1402). 
 
@@ -149,6 +152,7 @@ When solvating a protein in a crystal cell, the right amount of water have to be
 While equilibrating a system in NVT emsemble, the volume is kept constant by definition. However, if you switch to the NPT ensemble (which EFX experiment is), the volume of the box can change substantially in order to keep required water density (and pressure) constant. For instance, if the amount of solvent molecules is not sufficient, vacuum voids may form at the NVT step, which will potentially affect the dynamics of the protein. NPT procedure will of course remove the bubbles by adjusting the volume of the unit cell. Nevetherless, we have to avoid large volume fluctuations by choosing the precise amount of water.
 
 > As mentioned before, we can estimate the total number of water molecules needed to be added to the crystal cell (43% of solvent content for V = 89.106 nm^3): 1282 water molecules, including 94 x 4 = 376 crystal waters.
+
 
 - __TOOLS__: Niagara Supercomputer / GROMACS 2019.1 / MDAnalysis module for Python
 
@@ -163,24 +167,41 @@ __Description of the procedure:__
 
 3. Run position restraint (2 ns), NVT (10 ns) and NPT Berendsen (10 ns), and NPT Parinello-Rahman Anisotropic (100 ns) equilibration for each number of extra added water molecules. 
 
-> Note: the simulations of **1UC** crashed when using anisotropic PR algorithm, after the simulation box flattened in one of the directions. The problem is believed to be caused by the interactions with the periodic image. In order to avoid crashing we switched to the isotropic pressure coupling algorithm. It helped, however this algorithm couldn't equilibrate the pressure in the **27UC** system when all-bond constraints with 4fs time step were used. As a result of trial-and-error search, we decided to: 
-- exclude **1UC** system from out project (reason: interaction with periodic image)
-- not to use isotropic pressure coupling for any crystal simulations (reason: crystal is a rigid system with high protein content and is anisotropic by nature)
-- use isotropic pressure coupling algorithm for a protein in water **1SU** (reason: 90% of the system is water, which is a isotropic system by nature)
-- not to use virtual sites for hygrogens, thus compute with 2fs time step and h-bonds constraints (reason: it creates difficulties with pressure coupling algorithms)
-
 4. Do analysis of the volume changes and find the optimal number of water molecules to add that minimize volume fluctuations and keep the volume as close as posssible to a real unit cell volume: V = 2405.8 nm^3 for **27UC**.
 
-| Relative deviation from the true volume for a range of water added |  Volume fluctuations for N = 87 H2O molecules|
+| Relative deviation from the true volume for a range of water added **1UC**|  Volume fluctuations for N = 87 H2O molecules|
 :-------------------------:|:-------------------------:
 ![](pics/trend_volume.png) | ![](pics/volume.png) 
 
-The system with the correct amount of solvent remains mostly within 1.0% of the correct unit cell volume for the rest of the simulation. The black vertical line shows a 95% confindence interval, i.e. 95% of the time the system's volume fluctuates within these limits. Thus, the optimal number of water molecules for the **1UC** is N = 87. For **27UC** N = ???. 
+| Relative deviation from the true volume for a range of water added **27UC** |  Volume fluctuations for N = 2037 H2O molecules|
+:-------------------------:|:-------------------------:
+![](pics/trend_volume_27.png) | ![](pics/timeseries_2037.png)
+
+The system with the correct amount of solvent remains mostly within 1.0% of the correct unit cell volume for the rest of the simulation. The black vertical line shows a 95% confindence interval, i.e. 95% of the time the system's volume fluctuates within these limits. Thus, the optimal number of water molecules for the **1UC** is N = 87. For **27UC** N = 2070.
+
+> NB: the simulations of **1UC** crashed when using anisotropic PR algorithm, after the simulation box flattened along one of the directions. The problem is believed to be caused by the interactions with the periodic image. In order to avoid crashing we switched to the isotropic pressure coupling algorithm. It helped, however this algorithm couldn't equilibrate the pressure in the **27UC** system when all-bond constraints with 4fs time step were used. As a result of trial-and-error search, we decided to: 
+> - exclude **1UC** system from our project (reason: interaction with periodic image)
+> - not to use isotropic pressure coupling for any crystal simulations (reason: crystal is a rigid system with high protein content and is anisotropic by nature)
+> - use isotropic pressure coupling algorithm for a protein in water **1SU** (reason: 90% of the system is water, which is a isotropic system by nature)
+> - not to use virtual sites for hygrogens, thus compute with 2fs time step and h-bonds constraints (reason: it creates difficulties with pressure coupling algorithms) 
+
+## 2. Equilibration of the **27UC** system
+
+### 2.1. Choice of temperature of equilibration
+
+In order to test how well our MD simulations capture the properties of the crystal in the absence of electric field, we have to compare experimental observables (such as B-factors and the average crystal structure contained in the PDB) to the data that is available from the simulations. Since the experiment was done at 289 K, we expect that in the absence of the electric field, observed atomic fluctuations (RMSF) will be similar to those simulated at 289K. Root mean square fluctuations are computed relative to the aligned average structure. Simulation B-factors can be estimated using the formula: B_i = 8 * pi / 3 * (rmsf_i)^2. 
+
+> NB: Experimental B-factors (anisotropic temperature factors ) are estima
 
 
-## 2. Test simulations with electric field
 
-### 2.1. Heating of the crystal in NVE ensemble
+
+To compare the stability of the crystal in
+
+
+## 3. Test simulations with electric field
+
+### 3.1. Heating of the crystal in NVE ensemble
 
 We ran the test simulation of **1UC** system with electric field ON in the NVE ensemble, where the system is not coupled to any heat or pressure bath. Thus, the energy inflow from the external electric field makes the charges move faster, which leads to the very abrupt temperature increase (in 10 ns). The graph shows the temperature vs time for NVE simulation:
 
@@ -190,7 +211,7 @@ The results demonstrate that the temperature change during the experiment cannot
 
 > There are attempts to measure the temperature of the crystal experimentally...Ongoning work
 
-### 2.2. Stress test of the crystal in electric field
+### 3.2. Stress test of the crystal in electric field
 
 We also ran a set of production simulations with varying E-field (from 1 to 10 MV/cm) to see how well the crystal can withstand high electric fields. 
 
